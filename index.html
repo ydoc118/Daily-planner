@@ -30,50 +30,59 @@
     </header>
     <div class="container">
       <!-- Timeblocks go here -->
+      
       <div id = "9" class="form-group align-items-center">
-        <label class = labelColor for="exampleFormControlTextarea1">9 AM</label>
-        <textarea class="form-control textarea" id="exampleFormControlTextarea1" rows="3"></textarea>
-        <button type="button" class="btn btn-primary">Save</button>
+          <label class = "labelColor" for="exampleFormControlTextarea1">9 AM</label>
+          <textarea class="form-control textarea inputText" id="9t" rows="3"></textarea>
+          <button value = "9" type="button" id = "nineAm" class="btn btn-primary saveBtn">Save</button>
       </div>
+
       <div id = "10" class="form-group align-items-center">
         <label class = labelColor for="exampleFormControlTextarea1">10 AM</label>
-        <textarea class="form-control textarea" id="exampleFormControlTextarea1" rows="3"></textarea>
-        <button type="button" class="btn btn-primary">Save</button>
+        <textarea class="form-control textarea inputText" id="10t" rows="3"></textarea>
+        <button value = "10" type="button" id = "tenAm" class="btn btn-primary saveBtn">Save</button>
       </div>
+
       <div id = "11" class="form-group align-items-center">
         <label class = labelColor for="exampleFormControlTextarea1">11 AM</label>
-        <textarea class="form-control textarea" id="exampleFormControlTextarea1" rows="3"></textarea>
-        <button type="button" class="btn btn-primary">Save</button>
+        <textarea class="form-control textarea inputText" id="11t" rows="3"></textarea>
+        <button value = "11" type="button" id = "elevenAm" class="btn btn-primary saveBtn">Save</button>
       </div>
+
       <div id = "12" class="form-group align-items-center">
         <label class = labelColor for="exampleFormControlTextarea1">12 PM</label>
-        <textarea class="form-control textarea" id="exampleFormControlTextarea1" rows="3"></textarea>
-        <button type="button" class="btn btn-primary">Save</button>
+        <textarea class="form-control textarea inputText" id="12t" rows="3"></textarea>
+        <button value = "12" type="button" id = "twelvePm" class="btn btn-primary saveBtn">Save</button>
       </div>
+
       <div id = "13" class="form-group align-items-center">
         <label class = labelColor for="exampleFormControlTextarea1">1 PM</label>
-        <textarea class="form-control textarea" id="exampleFormControlTextarea1" rows="3"></textarea>
-        <button type="button" class="btn btn-primary">Save</button>
+        <textarea class="form-control textarea inputText" id="13t" rows="3"></textarea>
+        <button value = "13" type="button" id = "onePm" class="btn btn-primary saveBtn">Save</button>
       </div>
+
       <div id = "14" class="form-group align-items-center">
         <label class = labelColor for="exampleFormControlTextarea1">2 PM</label>
-        <textarea class="form-control textarea" id="exampleFormControlTextarea1" rows="3"></textarea>
-        <button type="button" class="btn btn-primary">Save</button>
+        <textarea class="form-control textarea inputText" id="14t" rows="3"></textarea>
+        <button value = "14" type="button" id = "twoPm" class="btn btn-primary saveBtn">Save</button>
       </div>
+
       <div id = "15" class="form-group align-items-center">
         <label class = labelColor for="exampleFormControlTextarea1">3 PM</label>
-        <textarea class="form-control textarea" id="exampleFormControlTextarea1" rows="3"></textarea>
-        <button type="button" class="btn btn-primary">Save</button>
+        <textarea class="form-control textarea inputText" id="15t" rows="3"></textarea>
+        <button value = "15" type="button" id = "threePm" class="btn btn-primary saveBtn">Save</button>
       </div>
+
       <div id = "16" class="form-group align-items-center">
         <label class = labelColor for="exampleFormControlTextarea1">4 PM</label>
-        <textarea class="form-control textarea" id="exampleFormControlTextarea1" rows="3"></textarea>
-        <button type="button" class="btn btn-primary">Save</button>
+        <textarea class="form-control textarea inputText" id="16t" rows="3"></textarea>
+        <button value = "16" type="button" id = "fourPm" class="btn btn-primary saveBtn">Save</button>
       </div>
+
       <div id = "17" class="form-group align-items-center">
         <label class = labelColor for="exampleFormControlTextarea1">5 PM</label>
-        <textarea class="form-control textarea" id="exampleFormControlTextarea1" rows="3"></textarea>
-        <button type="button" class="btn btn-primary">Save</button>
+        <textarea class="form-control textarea inputText" id="17t" rows="3"></textarea>
+        <button value = "17" type="button" id = "fivePm" class="btn btn-primary saveBtn">Save</button>
       </div>
     </div>
 
@@ -88,38 +97,44 @@
       //Current Day
       var dateTime = moment().format('dddd, MMMM Do YYYY');
       $("#currentDay").html(dateTime.toString());
-      var timeEl = [9,10,11,12,13,14,15,16,17]
-      console.log(timeEl[0])
 
+      //Setting variables
+      var timeEl = [9,10,11,12,13,14,15,16,17];
+      var buttonArray = ["nineAm", "tenAm", "elevenAm", "twelvePm", "onePm", "twoPm", "threePm", "fourPm", "fivePm"];
 
-
+      //Loop for getting local storage
+      for(var i = 9; i < 18; i++) {
+        var getPlannerStorage = localStorage.getItem(i);
+        $("#" + i + "t").text(getPlannerStorage);
+      }
+     
+      //Setting current time variables
       var dt = new Date();
       var currentTime = dt.getHours();
       console.log(currentTime);
 
-        // nine = document.getElementById("9"),
-        // ten = document.getElementById("10"),
-        // eleven = document.getElementById("11"),
-        // twelve = document.getElementById("12"),
-        // thirteen = document.getElementById("13"),
-        // fourteen = document.getElementById("14"),
-        // timeEl[7] = document.getElementById("15");
-        // sixteen = document.getElementById("16"),
-        // seventeen = document.getElementById("17"),
-
+      //Sets color for past, present, and future times on calander
       for(var i = 0; i < timeEl.length; i++) {
 
         if (timeEl[i] === currentTime) {
-          document.getElementById(timeEl[i]).setAttribute("class", "present");
+          $("#" + timeEl[i]).attr("class", "present");
         }
         else if (timeEl[i] < currentTime) {
-          document.getElementById(timeEl[i]).setAttribute("class", "past");
+          $("#" + timeEl[i]).attr("class", "past");
         }
         else if (timeEl[i] > currentTime) {
-          document.getElementById(timeEl[i]).setAttribute("class", "future");
+          $("#" + timeEl[i]).attr("class", "future");
         }
       }
-    
+
+      //Storing data inputs into local storage
+      for(var i = 0; i < buttonArray.length; i++) {
+        console.log(buttonArray[i])
+        $("#" + buttonArray[i]).on("click", function(e) {
+          plannerStorage = $("#" + e.target.value + "t").val();
+          localStorage.setItem(e.target.value, plannerStorage);
+        })
+      }
 
 
 
